@@ -1,6 +1,6 @@
 import {useEffect, useRef, forwardRef} from "react";
 import "./App.css"
-import gsap from "gsap"
+import gsap from "gsa"
 
 const Box = forwardRef(({ children }, ref) => {
   return <div className="box" ref={ref}>{children}</div>;
