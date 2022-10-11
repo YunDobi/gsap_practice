@@ -1,44 +1,36 @@
 import {useEffect, useRef, forwardRef} from "react";
-import "./App.css"
-import gsap from "gsa"
-
-const Box = forwardRef(({ children }, ref) => {
-  return <div className="box" ref={ref}>{children}</div>;
-});
-
-function Container({ children }) {
-  return <div><Box>Don't Animate Me</Box></div>;
-}
+// import "./App.css"
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 function App() {
-  const box1 = useRef();
-  const box2 = useRef();
-  
-  useEffect(() => {
-    const boxes = [
-      box1.current,
-      box2.current,
-    ];
-    
-    const ctx = gsap.context(() => {
-      // Target the two specific elements we have forwarded refs to
-      gsap.to(boxes, {
-        x: 100,
-        repeat: -1,
-        repeatDelay: 1,
-        yoyo: true
-      });
-    });
-    
-    return () => ctx.revert();
-  }, []);
-  
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
+  };
+
   return (
-    <div className="app">
-      <Box ref={box1}>Box</Box>
-      <Container></Container>
-      <Box ref={box2}>Box</Box>
-    </div>
-  );
+    <Carousel responsive={responsive}>
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+      <div>Item 4</div>
+    </Carousel>
+  )
 }
 export default App
